@@ -25,6 +25,13 @@ public class ItemBuilder {
         return new ItemBuilder(item, section);
     }
 
+    public ItemBuilder withAmount() {
+        if (section.contains("amount")) {
+            item.setAmount(section.getInt("amount"));
+        }
+        return this;
+    }
+
     public ItemBuilder withName() {
         if (section.contains("name")) {
             meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', section.getString("name")));

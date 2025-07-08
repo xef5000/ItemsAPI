@@ -3,6 +3,7 @@ package com.github.xef5000;
 import com.github.xef5000.api.ItemBuilder;
 import com.github.xef5000.api.material.MaterialHandler;
 import com.github.xef5000.api.material.Base64MaterialHandler;
+import com.github.xef5000.api.material.MinecraftMaterialHandler;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 
@@ -19,7 +20,7 @@ public class ItemsAPI {
         // The default handler should always be last as a fallback
         registerHandler(new Base64MaterialHandler());
         //registerHandler(new ItemsAdderMaterialHandler()); // Example
-        //registerHandler(new MinecraftMaterialHandler()); // Fallback
+        registerHandler(new MinecraftMaterialHandler()); // Fallback
     }
 
     public static void registerHandler(MaterialHandler handler) {
@@ -52,6 +53,7 @@ public class ItemsAPI {
 
         // 2. Apply all other optional properties
         ItemBuilder.start(item, section)
+                .withAmount()
                 .withName()
                 .withLore()
                 .withCustomModelData() // This method will use the VersionFactory
