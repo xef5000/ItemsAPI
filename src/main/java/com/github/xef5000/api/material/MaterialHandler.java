@@ -26,7 +26,9 @@ public interface MaterialHandler {
      * This method expects the section to have a "material" field
      */
     default ItemStack parse(ConfigurationSection section) {
-        String data = section.getString("material").substring(getPrefix().length() + 1);
+        String data = getPrefix().isEmpty() ?
+                section.getString("material") :
+                section.getString("material").substring(getPrefix().length() + 1);
         if (data == null || data.isEmpty()) {
             throw new IllegalArgumentException("Material string cannot be null or empty.");
         }
