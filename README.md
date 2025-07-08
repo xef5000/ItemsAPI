@@ -21,12 +21,15 @@ dependencies {
   implementation 'com.github.xef5000:ItemsAPI:VERSION'
 }
 
-tasks.withType<ShadowJar> {
-    // IMPORTANT: Change "com.myplugin" to your own plugin's package!
-    relocate("com.github.xef5000.itemsapi", "com.myplugin.libs.itemsapi")
-}
+tasks {
+    shadowJar {
+        // Replace "com.yourplugin" with your plugin's package name.
+        relocate "com.github.xef5000.itemsapi", "com.yourplugin.libs.itemsapi"
+        archiveClassifier.set('')
+    }
 
-tasks.build {
-    dependsOn(tasks.shadowJar)
+    build {
+        dependsOn shadowJar
+    }
 }
 ```
