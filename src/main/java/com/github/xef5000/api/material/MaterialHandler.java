@@ -34,9 +34,6 @@ public interface MaterialHandler {
         if (data == null || data.isEmpty()) {
             throw new IllegalArgumentException("Material string cannot be null or empty.");
         }
-        if (!canHandle(data)) {
-            throw new IllegalArgumentException("This handler cannot handle the material string: " + data);
-        }
         return parse(data);
     }
 }
