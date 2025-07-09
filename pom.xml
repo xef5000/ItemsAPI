@@ -6,7 +6,7 @@
 
     <groupId>com.github.xef5000</groupId>
     <artifactId>ItemsAPI</artifactId>
-    <version>1.0.5b</version>
+    <version>1.0.5c</version>
 
     <name>ItemsAPI</name>
     <description>A simple and powerful API for creating ItemStacks from configuration.</description>
