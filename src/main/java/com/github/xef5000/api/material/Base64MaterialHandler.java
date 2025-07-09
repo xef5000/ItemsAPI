@@ -19,11 +19,6 @@ public class Base64MaterialHandler implements MaterialHandler {
     }
 
     @Override
-    public boolean canHandle(String materialString) {
-        return materialString.toLowerCase().startsWith(getPrefix() + ":");
-    }
-
-    @Override
     public ItemStack parse(String data) {
 
         ItemStack head = new ItemStack(Material.PLAYER_HEAD);

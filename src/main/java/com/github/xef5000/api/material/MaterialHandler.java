@@ -13,7 +13,9 @@ public interface MaterialHandler {
     /**
      * Checks if this handler can process the given material string.
      */
-    boolean canHandle(String materialString);
+    default boolean canHandle(String materialString) {
+        return materialString.toLowerCase().startsWith(getPrefix() + ":");
+    };
 
     /**
      * Receives the data string and returns an ItemStack.

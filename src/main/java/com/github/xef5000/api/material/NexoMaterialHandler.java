@@ -11,11 +11,6 @@ public class NexoMaterialHandler implements MaterialHandler {
     }
 
     @Override
-    public boolean canHandle(String materialString) {
-        return materialString.toLowerCase().startsWith(getPrefix() + ":");
-    }
-
-    @Override
     public ItemStack parse(String materialString) {
         ItemBuilder itemBuilder = NexoItems.itemFromId(materialString);
         if (itemBuilder != null) {
