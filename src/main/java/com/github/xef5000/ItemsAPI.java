@@ -4,6 +4,7 @@ import com.github.xef5000.api.ItemBuilder;
 import com.github.xef5000.api.material.MaterialHandler;
 import com.github.xef5000.api.material.Base64MaterialHandler;
 import com.github.xef5000.api.material.MinecraftMaterialHandler;
+import com.github.xef5000.api.material.NexoMaterialHandler;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 
@@ -19,6 +20,7 @@ public class ItemsAPI {
     static {
         // The default handler should always be last as a fallback
         registerHandler(new Base64MaterialHandler());
+        registerHandler(new NexoMaterialHandler());
         //registerHandler(new ItemsAdderMaterialHandler()); // Example
         registerHandler(new MinecraftMaterialHandler()); // Fallback
     }
