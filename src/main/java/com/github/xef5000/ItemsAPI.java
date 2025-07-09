@@ -24,7 +24,7 @@ public class ItemsAPI {
 
     public static void registerHandler(MaterialHandler handler) {
         // Prepend to ensure custom handlers are checked before the default
-        materialHandlers.add(0, handler);
+        materialHandlers.add(handler);
     }
 
     public static ItemStack fromConfiguration(ConfigurationSection section) {
