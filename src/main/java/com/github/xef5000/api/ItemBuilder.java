@@ -1,7 +1,7 @@
 package com.github.xef5000.api;
 
 import com.github.xef5000.api.adapter.ItemMetaAdapter;
-import org.bukkit.ChatColor;
+import com.github.xef5000.api.utils.ColorHelper;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -34,7 +34,7 @@ public class ItemBuilder {
 
     public ItemBuilder withName() {
         if (section.contains("name")) {
-            meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', section.getString("name")));
+            meta.setDisplayName(ColorHelper.translate(section.getString("name")));
         }
         return this;
     }
@@ -49,7 +49,7 @@ public class ItemBuilder {
 
     public ItemBuilder withLore() {
         if (section.contains("lore")) {
-            meta.setLore(section.getStringList("lore"));
+            meta.setLore(ColorHelper.translate(section.getStringList("lore")));
         }
         return this;
     }
