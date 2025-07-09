@@ -1,7 +1,9 @@
 # ItemsAPI
 Easily manage items in config
+Made for 1.18+
 
 # Developers
+Requires Java 17
 Replace "VERSION" with the Jitpack version
 
 [![](https://jitpack.io/v/xef5000/ItemsAPI.svg)](https://jitpack.io/#xef5000/ItemsAPI)
