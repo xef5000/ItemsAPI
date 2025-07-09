@@ -34,6 +34,10 @@
             <id>AlessioDP</id>
             <url>https://repo.alessiodp.com/releases/</url>
         </repository>
+        <repository>
+            <id>matteodev</id>
+            <url>https://maven.devs.beer/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -53,6 +57,12 @@
             <artifactId>nexo</artifactId>
             <version>1.0.0</version>
             <scope>provided</scope> <!-- Assuming it should be provided by the server environment like PaperAPI -->
+        </dependency>
+        <dependency>
+            <groupId>dev.lone</groupId>
+            <artifactId>api-itemsadder</artifactId>
+            <version>4.0.10</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
