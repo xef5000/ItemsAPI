@@ -15,10 +15,14 @@ public class ItemsAPI {
 
     // Static initializer to register your handlers
     static {
-        // The default handler should always be last as a fallback
+        // Custom plugins material handlers
         registerHandler(new NexoMaterialHandler());
         registerHandler(new ItemsAdderMaterialHandler());
+        registerHandler(new OraxenMaterialHandler());
+
+        // Minecraft mechanic handlers
         registerHandler(new Base64MaterialHandler());
+
         registerHandler(new MinecraftMaterialHandler()); // Fallback
     }
 
