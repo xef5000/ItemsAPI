@@ -58,7 +58,6 @@ public class ItemsAPI {
         // 2. Apply all other optional properties
         ItemBuilder.start(item, section)
                 .withAmount()
-                .withComponents() // This method will use the NMSAdapter
                 .withName()
                 .withLore()
                 .withCustomModelData() // This method will use the VersionFactory
@@ -66,6 +65,7 @@ public class ItemsAPI {
                 .withItemFlags()
                 .withAttributes()
                 .withUnbreakable()
+                .withComponents() // Override legacy components
                 .apply(); // Apply the final ItemMeta
 
         return item;
