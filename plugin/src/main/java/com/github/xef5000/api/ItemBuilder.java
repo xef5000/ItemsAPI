@@ -14,6 +14,7 @@ public class ItemBuilder {
     private final ItemMeta meta;
     private final ConfigurationSection section;
     private final ItemMetaAdapter metaAdapter = VersionFactory.getItemMetaAdapter(); // Get version adapter
+    private final NMSAdapter nmsAdapter = VersionFactory.getNmsAdapter(); // Get NMS adapter
 
     private ItemBuilder(ItemStack item, ConfigurationSection section) {
         this.item = item;
@@ -28,6 +29,14 @@ public class ItemBuilder {
     public ItemBuilder withAmount() {
         if (section.contains("amount")) {
             item.setAmount(section.getInt("amount"));
+        }
+        return this;
+    }
+
+    public ItemBuilder withComponents() {
+        if (section.contains("components")) {
+            // Use the adapter here!
+            nmsAdapter.applyComponents(item, section.getConfigurationSection("components"));
         }
         return this;
     }

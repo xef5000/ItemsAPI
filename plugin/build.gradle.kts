@@ -1,0 +1,71 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+/*
+ * This is the build script for the 'plugin' module.
+ * It assembles the final shadable JAR file by combining the 'api' and 'nms' modules
+ * and shading any required libraries.
+ */
+
+plugins {
+    // The regular Java plugin is fine here.
+    java
+    // This is the Gradle equivalent of the Maven Shade Plugin.
+    id("com.gradleup.shadow") version "8.3.0"
+}
+
+// Set a custom name for the final JAR file, replacing <finalName>
+tasks.withType<ShadowJar> {
+    archiveBaseName.set("ItemsAPI")
+    archiveClassifier.set("") // Set classifier to empty to avoid "all" or "shadow" suffix
+    archiveVersion.set(project.version.toString())
+}
+
+dependencies {
+    // === LOCAL MODULES ===
+    // 'implementation' is used for dependencies that should be bundled.
+    // This tells Gradle to include the code from these modules in the final JAR.
+    implementation(project(":api"))
+    implementation(project(":nms:nms-legacy"))
+    implementation(project(":nms:nms-1_20_5"))
+
+    // === EXTERNAL APIs ===
+    // 'compileOnly' is used for APIs provided by the server or other plugins.
+    compileOnly("org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT")
+    compileOnly("com.nexomc:nexo:1.0.0")
+    compileOnly("dev.lone:api-itemsadder:4.0.10")
+    compileOnly("net.Indyuce:MMOItems-API:6.9.5-SNAPSHOT")
+
+    // The 'compileOnlyApi' configuration is like 'compileOnly' but also exposes the dependency
+    // as part of this module's API, which can be useful for downstream projects.
+    compileOnly("io.lumine:MythicLib-dist:1.6.2-SNAPSHOT")
+
+    // For dependencies with exclusions
+    compileOnly("io.th0rgal:oraxen:1.190.0") {
+        // 'exclude' is much cleaner in Gradle.
+        exclude(group = "me.gabytm.util", module = "actions-spigot")
+        exclude(group = "org.jetbrains", module = "annotations")
+        exclude(group = "com.ticxo", module = "PlayerAnimator")
+        exclude(group = "com.github.stefvanschie.inventoryframework", module = "IF")
+        exclude(group = "io.th0rgal", module = "protectionlib")
+        exclude(group = "dev.triumphteam", module = "triumph-gui")
+        exclude(group = "org.bstats", module = "bstats-bukkit")
+        exclude(group = "com.jeff-media") // You can exclude a whole group
+    }
+
+
+    // === SHADED LIBRARIES ===
+    // Use 'implementation' for libraries you want to shade into your JAR.
+    //implementation("net.byteflux:libby-bukkit:1.3.1")
+}
+
+tasks.build {
+    // This task is used to build the final JAR file.
+    // It depends on the ShadowJar task to ensure it runs after shading.
+    dependsOn(tasks.shadowJar)
+}
+
+// Configure the ShadowJar task (replaces <configuration> in maven-shade-plugin)
+tasks.shadowJar {
+    // Relocate Libby to avoid conflicts with other plugins.
+    relocate("net.byteflux.libby", "com.github.xef5000.libs.net.byteflux.libby")
+}

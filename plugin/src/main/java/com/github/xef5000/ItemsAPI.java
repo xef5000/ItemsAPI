@@ -58,6 +58,7 @@ public class ItemsAPI {
         // 2. Apply all other optional properties
         ItemBuilder.start(item, section)
                 .withAmount()
+                .withComponents() // This method will use the NMSAdapter
                 .withName()
                 .withLore()
                 .withCustomModelData() // This method will use the VersionFactory
