@@ -11,6 +11,7 @@ plugins {
     java
     // This is the Gradle equivalent of the Maven Shade Plugin.
     id("com.gradleup.shadow") version "8.3.0"
+    `maven-publish`
 }
 
 // Set a custom name for the final JAR file, replacing <finalName>
@@ -68,4 +69,24 @@ tasks.build {
 tasks.shadowJar {
     // Relocate Libby to avoid conflicts with other plugins.
     relocate("net.byteflux.libby", "com.github.xef5000.libs.net.byteflux.libby")
+}
+
+publishing {
+    publications {
+        // You can name this anything, "shadow" is a good convention
+        create<MavenPublication>("shadow") {
+            // The group and version are inherited from the root project
+            // The artifactId is the name of this module's directory by default
+            // Tell it to publish the output from the shadowJar task
+            artifact(tasks.shadowJar)
+        }
+    }
+    repositories {
+        // This block is optional but good practice. It defines where you could publish to.
+        // JitPack doesn't use this, but it completes the configuration.
+        maven {
+            name = "local"
+            url = uri("file://${buildDir}/repo")
+        }
+    }
 }
