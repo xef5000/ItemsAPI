@@ -20,6 +20,7 @@ public class ItemsAPI {
         registerHandler(new ItemsAdderMaterialHandler());
         registerHandler(new OraxenMaterialHandler());
         registerHandler(new MMOItemsMaterialHandler());
+        registerHandler(new HeadDatabaseMaterialHandler());
 
         // Minecraft mechanic handlers
         registerHandler(new Base64MaterialHandler());

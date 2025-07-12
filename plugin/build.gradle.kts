@@ -53,6 +53,8 @@ dependencies {
         exclude(group = "com.jeff-media") // You can exclude a whole group
     }
 
+    compileOnly("com.arcaniax:HeadDatabase-API:1.3.2")
+
 
     // === SHADED LIBRARIES ===
     // Use 'implementation' for libraries you want to shade into your JAR.
