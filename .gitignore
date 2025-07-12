@@ -9,10 +9,6 @@ dependency-reduced-pom.xml
 # Gradle
 .gradle/
 build/
-gradlew.bat
-gradlew
-gradle-wrapper.jar
-gradle-wrapper.properties
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
