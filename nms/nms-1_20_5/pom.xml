@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.github.xef5000</groupId>
+        <artifactId>items-api-nms-parent</artifactId> <!-- Assuming nms/pom.xml exists -->
+        <version>1.0.6</version>
+    </parent>
+
+    <artifactId>items-api-nms-1_20_5</artifactId>
+    <packaging>jar</packaging>
+    <name>ItemsAPI - NMS 1.20.5</name>
+
+     <repositories>
+         <repository>
+             <id>papermc-repo</id>
+             <url>https://repo.papermc.io/repository/maven-public/</url>
+         </repository>
+     </repositories>
+
+    <dependencies>
+        <!-- It needs the interfaces from the API module -->
+        <dependency>
+            <groupId>com.github.xef5000</groupId>
+            <artifactId>items-api-api</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- It compiles against the MODERN API -->
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+        </dependency>
+    </dependencies>
+</project>
