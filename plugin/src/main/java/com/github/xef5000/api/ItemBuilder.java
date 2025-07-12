@@ -36,7 +36,7 @@ public class ItemBuilder {
     public ItemBuilder withComponents() {
         if (section.contains("components")) {
             // Use the adapter here!
-            nmsAdapter.applyComponents(item, section.getConfigurationSection("components"));
+            nmsAdapter.applyComponents(meta, section.getConfigurationSection("components"));
         }
         return this;
     }

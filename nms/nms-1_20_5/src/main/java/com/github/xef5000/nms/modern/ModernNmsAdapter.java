@@ -9,50 +9,50 @@ import com.mojang.serialization.JsonOps;
 import net.minecraft.core.component.DataComponentPatch;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.craftbukkit.inventory.CraftItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
+import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public class ModernNmsAdapter implements NMSAdapter {
     private static final Gson GSON = new Gson();
 
-    @Override
-    public void applyComponents(org.bukkit.inventory.ItemStack meta, ConfigurationSection componentSection) {
-        // 1. Guard Clause: Do nothing if there's no component section.
-        if (componentSection == null) {
-            return;
-        }
+    private static Method updateFromPatchMethod = null;
 
-        if (!(meta instanceof CraftItemStack craftMeta)) {
-            Bukkit.getLogger().warning("[ItemsAPI] Could not apply components: ItemMeta is not an instance of CraftMetaItem.");
+    @Override
+    public void applyComponents(ItemMeta meta, ConfigurationSection componentSection) {
+        if (componentSection == null || meta == null) {
             return;
         }
 
         try {
-            // 2. Convert the Bukkit ConfigurationSection into a format that Mojang's serializer understands.
-            // ConfigSection -> Map -> JSON String -> JsonElement
             Map<String, Object> map = ConfigToJsonConverter.sectionToMap(componentSection);
             JsonElement jsonElement = GSON.fromJson(GSON.toJson(map), JsonElement.class);
 
-            // 3. Use the real ComponentPatch.CODEC to parse the JSON. No reflection needed!
-            // This is the magic of Paperweight.
             DataResult<DataComponentPatch> result = DataComponentPatch.CODEC.parse(JsonOps.INSTANCE, jsonElement);
             Optional<DataComponentPatch> patchOptional = result.result();
 
-            // 4. Check if parsing was successful and apply the patch.
-            if (patchOptional.isPresent()) {
-                // The applyComponents method is on the modern ItemMeta interface.
-                // This is clean, safe, and doesn't require casting to CraftMetaItem.
-                craftMeta.handle.applyComponents(patchOptional.get());
-            } else {
-                // If parsing failed, provide a helpful error message to the user.
+            if (patchOptional.isEmpty()) {
                 String errorMessage = result.error()
-                        .map(DataResult.Error::message) // If the error exists, get its message
-                        .orElse("Unknown parsing error");        // Otherwise, use this default string
+                        .map(DataResult.Error::message)
+                        .orElse("Unknown parsing error");
                 Bukkit.getLogger().warning("[ItemsAPI] Failed to parse item components section: " + errorMessage);
-
+                return;
             }
+
+            if (updateFromPatchMethod == null) {
+                // Get the actual class of the ItemMeta object (e.g., CraftMetaItem).
+                Class<?> metaClass = meta.getClass();
+                // Find the method on that class. It's named 'applyComponents' and takes one ComponentPatch argument.
+                updateFromPatchMethod = metaClass.getDeclaredMethod("updateFromPatch", DataComponentPatch.class, Set.class);
+                // Make it accessible even if it's not public (though it should be on the implementation).
+                updateFromPatchMethod.setAccessible(true);
+            }
+
+            // 2. Invoke the method on our specific ItemMeta instance.
+            updateFromPatchMethod.invoke(meta, patchOptional.get(), null);
 
         } catch (Exception e) {
             // Catch any unexpected errors during the process.

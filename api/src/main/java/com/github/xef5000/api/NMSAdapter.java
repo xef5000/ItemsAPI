@@ -1,7 +1,7 @@
 package com.github.xef5000.api;
 
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public interface NMSAdapter {
     /**
@@ -12,5 +12,5 @@ public interface NMSAdapter {
      * @param stack             The ItemStack to modify.
      * @param componentSection The ConfigurationSection containing the component data.
      */
-    void applyComponents(ItemStack stack, ConfigurationSection componentSection);
+    void applyComponents(ItemMeta stack, ConfigurationSection componentSection);
 }
