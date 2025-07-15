@@ -57,6 +57,7 @@ dependencies {
 
     compileOnly("me.zombie_striker:QualityArmory:2.0.21")
 
+    compileOnly("xyz.xenondevs.nova:nova-api:0.19")
 
     // === SHADED LIBRARIES ===
     // Use 'implementation' for libraries you want to shade into your JAR.

@@ -29,6 +29,7 @@ allprojects {
             name = "codemc-repo"
             url = uri("https://repo.codemc.io/repository/maven-public/")
         }
+        maven("https://repo.xenondevs.xyz/releases")
     }
 }
 
