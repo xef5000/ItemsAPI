@@ -53,6 +53,8 @@ dependencies {
 
     compileOnly("com.arcaniax:HeadDatabase-API:1.3.2")
 
+    compileOnly("maven.modrinth:SCore:5.25.7.12")
+
 
     // === SHADED LIBRARIES ===
     // Use 'implementation' for libraries you want to shade into your JAR.

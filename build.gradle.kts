@@ -23,7 +23,8 @@ allprojects {
         maven("https://maven.devs.beer/")
         maven("https://repo.oraxen.com/releases")
         maven("https://nexus.phoenixdevt.fr/repository/maven-public/")
-        maven(url = "https://mvn.lumine.io/repository/maven-public/")
+        maven("https://mvn.lumine.io/repository/maven-public/")
+        maven("https://api.modrinth.com/maven")
     }
 }
 

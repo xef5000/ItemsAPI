@@ -22,6 +22,7 @@ public class ItemsAPI {
         registerHandler(new MMOItemsMaterialHandler());
         registerHandler(new HeadDatabaseMaterialHandler());
         registerHandler(new MythicMobsMaterialHandler());
+        registerHandler(new ExecutableItemsMaterialHandler());
 
         // Minecraft mechanic handlers
         registerHandler(new Base64MaterialHandler());
