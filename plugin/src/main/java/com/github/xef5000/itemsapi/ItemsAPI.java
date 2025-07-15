@@ -1,7 +1,6 @@
 package com.github.xef5000.itemsapi;
 
 import com.github.xef5000.itemsapi.api.ItemBuilder;
-import com.github.xef5000.api.material.*;
 import com.github.xef5000.itemsapi.api.material.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
