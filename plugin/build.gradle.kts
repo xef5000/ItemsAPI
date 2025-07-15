@@ -36,6 +36,7 @@ dependencies {
     compileOnly("dev.lone:api-itemsadder:4.0.10")
     compileOnly("net.Indyuce:MMOItems-API:6.9.5-SNAPSHOT")
 
+    compileOnly("io.lumine:MythicLib-dist:1.6.2-SNAPSHOT")
     compileOnly("io.lumine:Mythic-Dist:5.6.1")
 
     // For dependencies with exclusions
