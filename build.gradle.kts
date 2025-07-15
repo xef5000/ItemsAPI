@@ -30,6 +30,7 @@ allprojects {
             url = uri("https://repo.codemc.io/repository/maven-public/")
         }
         maven("https://repo.xenondevs.xyz/releases")
+        maven("https://repo.auxilor.io/repository/maven-public/")
     }
 }
 

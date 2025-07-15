@@ -59,6 +59,13 @@ dependencies {
 
     compileOnly("xyz.xenondevs.nova:nova-api:0.19")
 
+    compileOnly("com.willfp:libreforge:4.75.1:all") {
+        // Equivalent to <exclusions><exclusion>*:*</exclusion></exclusions>
+        exclude(group = "*", module = "*")
+    }
+
+    compileOnly("com.willfp:eco:6.75.2")
+
     // === SHADED LIBRARIES ===
     // Use 'implementation' for libraries you want to shade into your JAR.
     //implementation("net.byteflux:libby-bukkit:1.3.1")

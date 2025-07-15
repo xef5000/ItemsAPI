@@ -25,6 +25,7 @@ public class ItemsAPI {
         registerHandler(new ExecutableItemsMaterialHandler());
         registerHandler(new QualityArmoryMaterialHandler());
         registerHandler(new NovaMaterialHandler());
+        registerHandler(new EcoMaterialHandler());
 
         // Minecraft mechanic handlers
         registerHandler(new Base64MaterialHandler());
