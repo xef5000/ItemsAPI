@@ -31,6 +31,7 @@ allprojects {
         }
         maven("https://repo.xenondevs.xyz/releases")
         maven("https://repo.auxilor.io/repository/maven-public/")
+        maven ("https://repo.bg-software.com/repository/api/")
     }
 }
 

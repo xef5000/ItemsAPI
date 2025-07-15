@@ -66,6 +66,8 @@ dependencies {
 
     compileOnly("com.willfp:eco:6.75.2")
 
+    compileOnly("com.bgsoftware:WildToolsAPI:2025.1")
+
     // === SHADED LIBRARIES ===
     // Use 'implementation' for libraries you want to shade into your JAR.
     //implementation("net.byteflux:libby-bukkit:1.3.1")
