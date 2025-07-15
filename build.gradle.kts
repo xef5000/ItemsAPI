@@ -25,6 +25,10 @@ allprojects {
         maven("https://nexus.phoenixdevt.fr/repository/maven-public/")
         maven("https://mvn.lumine.io/repository/maven-public/")
         maven("https://api.modrinth.com/maven")
+        maven {
+            name = "codemc-repo"
+            url = uri("https://repo.codemc.io/repository/maven-public/")
+        }
     }
 }
 

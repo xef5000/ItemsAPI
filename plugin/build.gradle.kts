@@ -55,6 +55,8 @@ dependencies {
 
     compileOnly("maven.modrinth:SCore:5.25.7.12")
 
+    compileOnly("me.zombie_striker:QualityArmory:2.0.21")
+
 
     // === SHADED LIBRARIES ===
     // Use 'implementation' for libraries you want to shade into your JAR.
