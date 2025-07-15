@@ -36,9 +36,7 @@ dependencies {
     compileOnly("dev.lone:api-itemsadder:4.0.10")
     compileOnly("net.Indyuce:MMOItems-API:6.9.5-SNAPSHOT")
 
-    // The 'compileOnlyApi' configuration is like 'compileOnly' but also exposes the dependency
-    // as part of this module's API, which can be useful for downstream projects.
-    compileOnly("io.lumine:MythicLib-dist:1.6.2-SNAPSHOT")
+    compileOnly("io.lumine:Mythic-Dist:5.6.1")
 
     // For dependencies with exclusions
     compileOnly("io.th0rgal:oraxen:1.190.0") {
