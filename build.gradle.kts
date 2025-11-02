@@ -10,7 +10,7 @@ plugins {
 allprojects {
     // Set the group and version for all modules. Replaces <groupId> and <version>.
     group = "com.github.xef5000"
-    version = "1.1.3a"
+    version = "1.2.0"
 
     // Define the repositories for all modules. Replaces the <repositories> section.
     // By defining them here, you don't need to repeat them in every child module.
@@ -32,6 +32,11 @@ allprojects {
         maven("https://repo.xenondevs.xyz/releases")
         maven("https://repo.auxilor.io/repository/maven-public/")
         maven ("https://repo.bg-software.com/repository/api/")
+
+        // Currencies
+        maven ("https://jitpack.io")
+        maven("https://repo.rosewooddev.io/repository/public/")
+        maven("https://repo.nightexpressdev.com/releases")
     }
 }
 
