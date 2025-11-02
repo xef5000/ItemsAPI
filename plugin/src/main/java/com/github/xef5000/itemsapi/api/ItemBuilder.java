@@ -5,6 +5,7 @@ import com.github.xef5000.itemsapi.api.utils.ColorHelper;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Objects;
@@ -59,6 +60,15 @@ public class ItemBuilder {
     public ItemBuilder withLore() {
         if (section.contains("lore")) {
             meta.setLore(ColorHelper.translate(section.getStringList("lore")));
+        }
+        return this;
+    }
+
+    public ItemBuilder withDurability() {
+        if (section.contains("durability")) {
+            if (meta instanceof Damageable damageable) {
+                damageable.setDamage(section.getInt("durability"));
+            }
         }
         return this;
     }

@@ -10,7 +10,7 @@ plugins {
 allprojects {
     // Set the group and version for all modules. Replaces <groupId> and <version>.
     group = "com.github.xef5000"
-    version = "1.1.2a"
+    version = "1.1.3"
 
     // Define the repositories for all modules. Replaces the <repositories> section.
     // By defining them here, you don't need to repeat them in every child module.

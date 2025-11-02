@@ -67,6 +67,7 @@ public class ItemsAPI {
                 .withAmount()
                 .withName()
                 .withLore()
+                .withDurability()
                 .withCustomModelData() // This method will use the VersionFactory
                 .withEnchants()
                 .withItemFlags()
