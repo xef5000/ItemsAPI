@@ -72,7 +72,7 @@ dependencies {
     // === Currency ===
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
     compileOnly("org.black_ixx:playerpoints:3.3.2")
-    compileOnly("su.nightexpress.coinsengine:CoinsEngine:2.4.2")
+    compileOnly("su.nightexpress.coinsengine:CoinsEngine:2.6.0")
 
     // === SHADED LIBRARIES ===
     // Use 'implementation' for libraries you want to shade into your JAR.
@@ -106,7 +106,7 @@ publishing {
         // JitPack doesn't use this, but it completes the configuration.
         maven {
             name = "local"
-            url = uri("file://${buildDir}/repo")
+            url = layout.buildDirectory.dir("repo").get().asFile.toURI()
         }
     }
 }

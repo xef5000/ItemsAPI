@@ -16,6 +16,7 @@ allprojects {
     // By defining them here, you don't need to repeat them in every child module.
     repositories {
         mavenCentral()
+        gradlePluginPortal()
         maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
         maven("https://repo.papermc.io/repository/maven-public/")
         maven("https://repo.nexomc.com/releases")

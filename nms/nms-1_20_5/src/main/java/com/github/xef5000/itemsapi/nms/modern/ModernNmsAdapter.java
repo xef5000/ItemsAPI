@@ -43,11 +43,35 @@ public class ModernNmsAdapter implements NMSAdapter {
             }
 
             if (updateFromPatchMethod == null) {
-                // Get the actual class of the ItemMeta object (e.g., CraftMetaItem).
+                // Get the actual class of the ItemMeta object (e.g., CraftMetaItem, CraftMetaSkull, etc.).
                 Class<?> metaClass = meta.getClass();
-                // Find the method on that class. It's named 'applyComponents' and takes one ComponentPatch argument.
-                updateFromPatchMethod = metaClass.getDeclaredMethod("updateFromPatch", DataComponentPatch.class, Set.class);
-                // Make it accessible even if it's not public (though it should be on the implementation).
+
+// Walk up the class hierarchy to find the method (handles inheritance)
+                Method updateFromPatchMethod = null;
+                Class<?> currentClass = metaClass;
+
+                while (currentClass != null && updateFromPatchMethod == null) {
+                    try {
+                        // Try to find the method in the current class
+                        updateFromPatchMethod = currentClass.getDeclaredMethod(
+                                "updateFromPatch",
+                                DataComponentPatch.class,
+                                Set.class
+                        );
+                    } catch (NoSuchMethodException e) {
+                        // Method not found in this class, try the parent class
+                        currentClass = currentClass.getSuperclass();
+                    }
+                }
+
+                // If we still haven't found it, throw an exception
+                if (updateFromPatchMethod == null) {
+                    throw new NoSuchMethodException(
+                            "updateFromPatch method not found in " + metaClass.getName() + " or any of its superclasses"
+                    );
+                }
+
+                // Make it accessible even if it's protected/private
                 updateFromPatchMethod.setAccessible(true);
             }
 

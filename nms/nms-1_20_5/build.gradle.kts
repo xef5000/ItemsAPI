@@ -6,7 +6,7 @@
 plugins {
     // Apply the official Paper plugin for NMS development.
     // This plugin automatically handles downloading the server JAR and remapping your code.
-    id("io.papermc.paperweight.userdev") version "1.7.1"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
     `java-library`
 }
 
@@ -18,7 +18,7 @@ dependencies {
 
    // paperweight.paperDevBundle("1.20.5-R0.1-SNAPSHOT")
 
-    paperDevBundle("1.20.6-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("1.20.6-R0.1-SNAPSHOT")
 
     // You only need to add other dependencies if you use them directly.
     compileOnly("com.google.code.gson:gson:2.10.1")
