@@ -10,7 +10,7 @@ plugins {
     // The regular Java plugin is fine here.
     java
     // This is the Gradle equivalent of the Maven Shade Plugin.
-    id("com.gradleup.shadow") version "8.3.0"
+    id("com.gradleup.shadow") version "9.0.0"
     `maven-publish`
 }
 
