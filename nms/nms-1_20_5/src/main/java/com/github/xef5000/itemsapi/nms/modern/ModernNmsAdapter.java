@@ -46,8 +46,6 @@ public class ModernNmsAdapter implements NMSAdapter {
                 // Get the actual class of the ItemMeta object (e.g., CraftMetaItem, CraftMetaSkull, etc.).
                 Class<?> metaClass = meta.getClass();
 
-// Walk up the class hierarchy to find the method (handles inheritance)
-                Method updateFromPatchMethod = null;
                 Class<?> currentClass = metaClass;
 
                 while (currentClass != null && updateFromPatchMethod == null) {
@@ -64,7 +62,6 @@ public class ModernNmsAdapter implements NMSAdapter {
                     }
                 }
 
-                // If we still haven't found it, throw an exception
                 if (updateFromPatchMethod == null) {
                     throw new NoSuchMethodException(
                             "updateFromPatch method not found in " + metaClass.getName() + " or any of its superclasses"
