@@ -78,6 +78,7 @@ dependencies {
     compileOnly("com.github.Realizedd:TokenManager:3.2.4") {
         exclude(group = "*", module = "*")
     }
+    compileOnly("com.github.Emibergo02:RedisEconomy:4.3.19")
     compileOnly(fileTree("libraries") { include("*.jar") })
 
     // === SHADED LIBRARIES ===

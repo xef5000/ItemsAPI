@@ -68,6 +68,14 @@ public class ItemsAPICurrency {
             return new UltraEconomyCurrencyIntegration(currencyName);
         });
 
+        registerIntegration("REDISECONOMY", config -> {
+            String currencyName = config.getString("currency-name");
+            if (currencyName == null || currencyName.isEmpty()) {
+                throw new IllegalArgumentException("The 'currency-name' key is missing in the config for this UltraEconomy currency.");
+            }
+            return new RedisEconomyCurrencyIntegration(currencyName);
+        });
+
         registerIntegration("CUSTOM", config -> {
             String placeholder = config.getString("balance-placeholder");
             String depositCommand = config.getString("deposit-command");
