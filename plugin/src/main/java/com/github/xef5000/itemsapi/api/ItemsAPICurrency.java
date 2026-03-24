@@ -45,6 +45,7 @@ public class ItemsAPICurrency {
         // Integrations with no parameters
         registerIntegration("VAULT", config -> new VaultCurrencyIntegration());
         registerIntegration("PLAYERPOINTS", config -> new PlayerPointsCurrencyIntegration());
+        registerIntegration("TOKENMANAGER", config -> new TokenManagerCurrencyIntegration());
 
         // Integrations WITH parameters
         registerIntegration("COINSENGINE", config -> {

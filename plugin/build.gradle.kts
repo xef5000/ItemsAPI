@@ -75,7 +75,9 @@ dependencies {
     compileOnly("su.nightexpress.coinsengine:CoinsEngine:2.7.0")
     compileOnly("me.clip:placeholderapi:2.12.2")
     compileOnly("me.TechsCode:UltraEconomyAPI:1.1.2")
-
+    compileOnly("com.github.Realizedd:TokenManager:3.2.4") {
+        exclude(group = "*", module = "*")
+    }
     // === SHADED LIBRARIES ===
     // Use 'implementation' for libraries you want to shade into your JAR.
     //implementation("net.byteflux:libby-bukkit:1.3.1")
