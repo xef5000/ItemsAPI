@@ -4,6 +4,7 @@ import com.github.xef5000.itemsapi.api.currency.Currency;
 import com.github.xef5000.itemsapi.api.currency.CurrencyIntegration;
 import com.github.xef5000.itemsapi.api.currency.IntegrationFactory;
 import com.github.xef5000.itemsapi.api.currency.integrations.CoinsEngineCurrencyIntegration;
+import com.github.xef5000.itemsapi.api.currency.integrations.CustomCurrencyIntegration;
 import com.github.xef5000.itemsapi.api.currency.integrations.PlayerPointsCurrencyIntegration;
 import com.github.xef5000.itemsapi.api.currency.integrations.VaultCurrencyIntegration;
 import org.bukkit.configuration.ConfigurationSection;
@@ -56,6 +57,16 @@ public class ItemsAPICurrency {
                 throw new IllegalArgumentException("The 'currency-name' key is missing in the config for this CoinsEngine currency.");
             }
             return new CoinsEngineCurrencyIntegration(currencyName);
+        });
+
+        registerIntegration("CUSTOM", config -> {
+            String placeholder = config.getString("balance-placeholder");
+            String depositCommand = config.getString("deposit-command");
+            String withdrawCommand = config.getString("withdraw-command");
+            if (placeholder == null || depositCommand == null || withdrawCommand == null) {
+                throw new IllegalArgumentException("Missing required parameters for custom currency integration.");
+            }
+            return new CustomCurrencyIntegration(placeholder, depositCommand, withdrawCommand);
         });
     }
 
