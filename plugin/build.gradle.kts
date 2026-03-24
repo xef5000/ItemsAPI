@@ -78,6 +78,8 @@ dependencies {
     compileOnly("com.github.Realizedd:TokenManager:3.2.4") {
         exclude(group = "*", module = "*")
     }
+    compileOnly(fileTree("libraries") { include("*.jar") })
+
     // === SHADED LIBRARIES ===
     // Use 'implementation' for libraries you want to shade into your JAR.
     //implementation("net.byteflux:libby-bukkit:1.3.1")

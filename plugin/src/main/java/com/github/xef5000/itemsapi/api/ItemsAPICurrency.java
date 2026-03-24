@@ -46,6 +46,7 @@ public class ItemsAPICurrency {
         registerIntegration("VAULT", config -> new VaultCurrencyIntegration());
         registerIntegration("PLAYERPOINTS", config -> new PlayerPointsCurrencyIntegration());
         registerIntegration("TOKENMANAGER", config -> new TokenManagerCurrencyIntegration());
+        registerIntegration("TOKENENCHANT", config -> new TokenEnchantCurrencyIntegration());
 
         // Integrations WITH parameters
         registerIntegration("COINSENGINE", config -> {
