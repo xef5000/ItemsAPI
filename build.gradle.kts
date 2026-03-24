@@ -35,8 +35,9 @@ allprojects {
 
         // Currencies
         maven ("https://jitpack.io")
-        maven("https://repo.rosewooddev.io/repository/public/")
-        maven("https://repo.nightexpressdev.com/releases")
+        maven("https://repo.rosewooddev.io/repository/public/") // PlayerPoints
+        maven("https://repo.nightexpressdev.com/releases") // CoinsEngine
+        maven("https://repo.extendedclip.com/releases/") // PAPI
     }
 }
 

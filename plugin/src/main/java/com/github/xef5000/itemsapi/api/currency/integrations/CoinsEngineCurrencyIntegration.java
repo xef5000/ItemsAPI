@@ -3,18 +3,27 @@ package com.github.xef5000.itemsapi.api.currency.integrations;
 import com.github.xef5000.itemsapi.api.currency.CurrencyIntegration;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import su.nightexpress.coinsengine.api.CoinsEngineAPI;
-import su.nightexpress.coinsengine.api.currency.Currency;
+import org.bukkit.plugin.RegisteredServiceProvider;
+import su.nightexpress.excellenteconomy.api.ExcellentEconomyAPI;
+import su.nightexpress.excellenteconomy.api.currency.ExcellentCurrency;
 
 public class CoinsEngineCurrencyIntegration implements CurrencyIntegration {
 
-    private final Currency currency;
+    private final ExcellentCurrency currency;
+    private final ExcellentEconomyAPI economyApi;
 
     public CoinsEngineCurrencyIntegration(String currencyName) {
         if (!Bukkit.getPluginManager().isPluginEnabled("CoinsEngine")) {
             throw new RuntimeException("CoinsEngine is not installed, cannot use CoinsEngine currency integration.");
         }
-        this.currency = CoinsEngineAPI.getCurrency(currencyName);
+        RegisteredServiceProvider<ExcellentEconomyAPI> rsp =
+                Bukkit.getServer().getServicesManager().getRegistration(ExcellentEconomyAPI.class);
+
+        if (rsp == null)
+            throw new RuntimeException("CoinsEngine is not installed, cannot use CoinsEngine currency integration.");
+        economyApi = rsp.getProvider();
+
+        this.currency = economyApi.getCurrency(currencyName);
         if (currency == null)
             throw new RuntimeException("CoinsEngine currency not found: ");
     }
@@ -22,16 +31,16 @@ public class CoinsEngineCurrencyIntegration implements CurrencyIntegration {
 
     @Override
     public double getBalance(Player player) {
-        return CoinsEngineAPI.getBalance(player, currency);
+        return economyApi.getBalance(player, currency);
     }
 
     @Override
     public void deposit(Player player, double amount) {
-        CoinsEngineAPI.addBalance(player, currency, amount);
+        economyApi.deposit(player, currency, amount);
     }
 
     @Override
     public void withdraw(Player player, double amount) {
-        CoinsEngineAPI.removeBalance(player, currency, amount);
+        economyApi.withdraw(player, currency, amount);
     }
 }
