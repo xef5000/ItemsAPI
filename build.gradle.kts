@@ -39,6 +39,7 @@ allprojects {
         maven("https://repo.rosewooddev.io/repository/public/") // PlayerPoints
         maven("https://repo.nightexpressdev.com/releases") // CoinsEngine
         maven("https://repo.extendedclip.com/releases/") // PAPI
+        maven("https://repo.techscode.com/repository/techscode-apis/") // Ultra Economy
     }
 }
 

@@ -3,10 +3,7 @@ package com.github.xef5000.itemsapi.api;
 import com.github.xef5000.itemsapi.api.currency.Currency;
 import com.github.xef5000.itemsapi.api.currency.CurrencyIntegration;
 import com.github.xef5000.itemsapi.api.currency.IntegrationFactory;
-import com.github.xef5000.itemsapi.api.currency.integrations.CoinsEngineCurrencyIntegration;
-import com.github.xef5000.itemsapi.api.currency.integrations.CustomCurrencyIntegration;
-import com.github.xef5000.itemsapi.api.currency.integrations.PlayerPointsCurrencyIntegration;
-import com.github.xef5000.itemsapi.api.currency.integrations.VaultCurrencyIntegration;
+import com.github.xef5000.itemsapi.api.currency.integrations.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -57,6 +54,14 @@ public class ItemsAPICurrency {
                 throw new IllegalArgumentException("The 'currency-name' key is missing in the config for this CoinsEngine currency.");
             }
             return new CoinsEngineCurrencyIntegration(currencyName);
+        });
+
+        registerIntegration("ULTRAECONOMY", config -> {
+            String currencyName = config.getString("currency-name");
+            if (currencyName == null || currencyName.isEmpty()) {
+                throw new IllegalArgumentException("The 'currency-name' key is missing in the config for this UltraEconomy currency.");
+            }
+            return new UltraEconomyCurrencyIntegration(currencyName);
         });
 
         registerIntegration("CUSTOM", config -> {

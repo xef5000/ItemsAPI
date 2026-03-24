@@ -74,6 +74,7 @@ dependencies {
     compileOnly("org.black_ixx:playerpoints:3.3.2")
     compileOnly("su.nightexpress.coinsengine:CoinsEngine:2.7.0")
     compileOnly("me.clip:placeholderapi:2.12.2")
+    compileOnly("me.TechsCode:UltraEconomyAPI:1.1.2")
 
     // === SHADED LIBRARIES ===
     // Use 'implementation' for libraries you want to shade into your JAR.
