@@ -10,12 +10,13 @@ plugins {
 allprojects {
     // Set the group and version for all modules. Replaces <groupId> and <version>.
     group = "com.github.xef5000"
-    version = "1.2.0"
+    version = "1.2.1c"
 
     // Define the repositories for all modules. Replaces the <repositories> section.
     // By defining them here, you don't need to repeat them in every child module.
     repositories {
         mavenCentral()
+        gradlePluginPortal()
         maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
         maven("https://repo.papermc.io/repository/maven-public/")
         maven("https://repo.nexomc.com/releases")

@@ -10,7 +10,7 @@ plugins {
     // The regular Java plugin is fine here.
     java
     // This is the Gradle equivalent of the Maven Shade Plugin.
-    id("com.gradleup.shadow") version "8.3.0"
+    id("com.gradleup.shadow") version "9.0.0"
     `maven-publish`
 }
 
@@ -72,8 +72,7 @@ dependencies {
     // === Currency ===
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
     compileOnly("org.black_ixx:playerpoints:3.3.2")
-    compileOnly("su.nightexpress.coinsengine:CoinsEngine:2.7.0")
-    compileOnly("me.clip:placeholderapi:2.12.2")
+    compileOnly("su.nightexpress.coinsengine:CoinsEngine:2.6.0")
 
     // === SHADED LIBRARIES ===
     // Use 'implementation' for libraries you want to shade into your JAR.
@@ -107,7 +106,7 @@ publishing {
         // JitPack doesn't use this, but it completes the configuration.
         maven {
             name = "local"
-            url = uri("file://${buildDir}/repo")
+            url = layout.buildDirectory.dir("repo").get().asFile.toURI()
         }
     }
 }
