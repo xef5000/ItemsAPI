@@ -113,7 +113,8 @@ public class ItemBuilder {
 
     // ... method for each property (lore, enchants, flags, etc.)
 
-    public void apply() {
+    public ItemStack apply() {
         item.setItemMeta(meta);
+        return item;
     }
 }

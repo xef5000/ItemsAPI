@@ -39,7 +39,7 @@ public class ItemsAPI {
         materialHandlers.add(handler);
     }
 
-    public static ItemStack fromConfiguration(ConfigurationSection section) {
+    public static ItemBuilder builderFromConfiguration(ConfigurationSection section) {
         if (section == null) {
             throw new IllegalArgumentException("ConfigurationSection cannot be null.");
         }
@@ -63,7 +63,7 @@ public class ItemsAPI {
         }
 
         // 2. Apply all other optional properties
-        ItemBuilder.start(item, section)
+        return ItemBuilder.start(item, section)
                 .withAmount()
                 .withName()
                 .withLore()
@@ -73,10 +73,11 @@ public class ItemsAPI {
                 .withItemFlags()
                 .withAttributes()
                 .withUnbreakable()
-                .withComponents() // Override legacy components
-                .apply(); // Apply the final ItemMeta
+                .withComponents(); // Override legacy components;
+    }
 
-        return item;
+    public static ItemStack fromConfiguration(ConfigurationSection section) {
+        return builderFromConfiguration(section).apply();
     }
 
 }
