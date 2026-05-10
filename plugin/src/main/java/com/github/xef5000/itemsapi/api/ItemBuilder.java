@@ -47,23 +47,6 @@ public class ItemBuilder {
         this.flags = flags;
     }
 
-    public static ItemBuilder start(ItemStack item, ConfigurationSection section) {
-        return new ItemBuilder(item,
-                section.getInt("amount", 1),
-                section.getString("name", null),
-                section.contains("custom-model-data") ? section.getInt("custom-model-data", 0) : null,
-                section.getStringList("lore"),
-                section.getInt("durability", 0),
-                section.getBoolean("unbreakable", false),
-                section.contains("components") ? section.getConfigurationSection("components").getValues(false) : null,
-                section.contains("enchants") ? Objects.requireNonNull(section.getConfigurationSection("enchants")).getKeys(false).stream().collect(java.util.stream.Collectors.toMap(
-                        key -> Enchantment.getByName(key.toUpperCase()),
-                        key -> section.getInt("enchants." + key)
-                )) : null,
-                section.getStringList("flags")
-                );
-    }
-
     public ItemBuilder withAmount() {
         item.setAmount(this.amount);
         return this;
