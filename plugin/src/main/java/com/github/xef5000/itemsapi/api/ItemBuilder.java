@@ -22,15 +22,15 @@ public class ItemBuilder {
     private final NMSAdapter nmsAdapter = VersionFactory.getNmsAdapter(); // Get NMS adapter
 
     // Values
-    private final int amount;
-    private final String name;
-    private final Integer customModelData;
-    private final List<String> lore;
-    private final int durability;
-    private final boolean unbreakable;
-    private final Map<String, Object> components;
-    private final Map<Enchantment, Integer> enchantments;
-    private final List<String> flags;
+    public final int amount;
+    public final String name;
+    public final Integer customModelData;
+    public final List<String> lore;
+    public final int durability;
+    public final boolean unbreakable;
+    public final Map<String, Object> components;
+    public final Map<Enchantment, Integer> enchantments;
+    public final List<String> flags;
 
     public ItemBuilder(ItemStack item, int amount, String name, int customModelData, List<String> lore, int durability, boolean unbreakable, Map<String, Object> components, Map<Enchantment, Integer> enchantments, List<String> flags) {
         this.item = item;

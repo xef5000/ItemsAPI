@@ -49,9 +49,9 @@ public class ItemsAPI {
                 String data = handler.getPrefix().isEmpty() ?
                         materialString :
                         materialString.substring(handler.getPrefix().length() + 1);
-                if (data == null || data.isEmpty()) {
+                if (data.isEmpty())
                     throw new IllegalArgumentException("Material string cannot be null or empty.");
-                }
+
                 item = handler.parse(materialString);
                 break;
             }
