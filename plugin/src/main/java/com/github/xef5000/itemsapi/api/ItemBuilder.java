@@ -8,85 +8,118 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class ItemBuilder {
     private final ItemStack item;
     private final ItemMeta meta;
-    private final ConfigurationSection section;
+
+    // Adapters
     private final ItemMetaAdapter metaAdapter = VersionFactory.getItemMetaAdapter(); // Get version adapter
     private final NMSAdapter nmsAdapter = VersionFactory.getNmsAdapter(); // Get NMS adapter
 
-    private ItemBuilder(ItemStack item, ConfigurationSection section) {
+    // Values
+    private final int amount;
+    private final String name;
+    private final Integer customModelData;
+    private final List<String> lore;
+    private final int durability;
+    private final boolean unbreakable;
+    private final Map<String, Object> components;
+    private final Map<Enchantment, Integer> enchantments;
+    private final List<String> flags;
+
+    public ItemBuilder(ItemStack item, int amount, String name, int customModelData, List<String> lore, int durability, boolean unbreakable, Map<String, Object> components, Map<Enchantment, Integer> enchantments, List<String> flags) {
         this.item = item;
         this.meta = item.getItemMeta();
-        this.section = section;
+
+        this.amount = amount;
+        this.name = name;
+        this.customModelData = customModelData;
+        this.lore = lore;
+        this.durability = durability;
+        this.unbreakable = unbreakable;
+        this.components = components;
+        this.enchantments = enchantments;
+        this.flags = flags;
     }
 
     public static ItemBuilder start(ItemStack item, ConfigurationSection section) {
-        return new ItemBuilder(item, section);
+        return new ItemBuilder(item,
+                section.getInt("amount", 1),
+                section.getString("name", null),
+                section.contains("custom-model-data") ? section.getInt("custom-model-data", 0) : null,
+                section.getStringList("lore"),
+                section.getInt("durability", 0),
+                section.getBoolean("unbreakable", false),
+                section.contains("components") ? section.getConfigurationSection("components").getValues(false) : null,
+                section.contains("enchants") ? Objects.requireNonNull(section.getConfigurationSection("enchants")).getKeys(false).stream().collect(java.util.stream.Collectors.toMap(
+                        key -> Enchantment.getByName(key.toUpperCase()),
+                        key -> section.getInt("enchants." + key)
+                )) : null,
+                section.getStringList("flags")
+                );
     }
 
     public ItemBuilder withAmount() {
-        if (section.contains("amount")) {
-            item.setAmount(section.getInt("amount"));
-        }
+        item.setAmount(this.amount);
         return this;
     }
 
     public ItemBuilder withComponents() {
-        if (section.contains("components")) {
-            // Use the adapter here!
-            nmsAdapter.applyComponents(meta, section.getConfigurationSection("components"));
-        }
+        if (this.components != null)
+            nmsAdapter.applyComponents(meta, this.components);
+
         return this;
     }
 
     public ItemBuilder withName() {
-        if (section.contains("name")) {
-            meta.setDisplayName(ColorHelper.translate(section.getString("name")));
-        }
+        if (this.name != null)
+            meta.setDisplayName(ColorHelper.translate(this.name));
+
         return this;
     }
 
     public ItemBuilder withCustomModelData() {
-        if (section.contains("custom-model-data")) {
-            // Use the adapter here!
-            metaAdapter.applyCustomModelData(meta, section.getInt("custom-model-data"));
-        }
+        if (this.customModelData != null)
+            metaAdapter.applyCustomModelData(meta, this.customModelData);
+
         return this;
     }
 
     public ItemBuilder withLore() {
-        if (section.contains("lore")) {
-            meta.setLore(ColorHelper.translate(section.getStringList("lore")));
-        }
+        if (lore != null)
+            meta.setLore(ColorHelper.translate(this.lore));
+
         return this;
     }
 
     public ItemBuilder withDurability() {
-        if (section.contains("durability")) {
-            if (meta instanceof Damageable damageable) {
-                damageable.setDamage(section.getInt("durability"));
-            }
-        }
+        if (meta instanceof Damageable damageable)
+            damageable.setDamage(durability); // Default is zero
+
         return this;
     }
 
     public ItemBuilder withEnchants() {
-        if (section.contains("enchants")) {
-            section.getConfigurationSection("enchants").getKeys(false).forEach(key -> {
-                String enchantment = key.toUpperCase();
-                int level = section.getInt("enchants." + key);
-                meta.addEnchant(Objects.requireNonNull(Enchantment.getByName(enchantment)), level, true);
+        if (this.enchantments != null) {
+            enchantments.forEach((enchantment, level) -> {
+                if (enchantment != null) {
+                    meta.addEnchant(enchantment, level, true);
+                } else {
+                    System.err.println("Invalid enchantment in config: " + enchantment);
+                }
             });
         }
         return this;
     }
 
     public ItemBuilder withItemFlags() {
-        if (section.contains("flags")) {
-            section.getStringList("flags").forEach(flag -> {
+        if (this.flags != null) {
+            this.flags.forEach(flag -> {
                 try {
                     meta.addItemFlags(org.bukkit.inventory.ItemFlag.valueOf(flag.toUpperCase()));
                 } catch (IllegalArgumentException e) {
@@ -105,9 +138,9 @@ public class ItemBuilder {
     }
 
     public ItemBuilder withUnbreakable() {
-        if (section.getBoolean("unbreakable", false)) {
+        if (this.unbreakable)
             meta.setUnbreakable(true);
-        }
+
         return this;
     }
 

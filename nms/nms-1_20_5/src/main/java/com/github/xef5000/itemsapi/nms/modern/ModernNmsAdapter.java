@@ -25,14 +25,13 @@ public class ModernNmsAdapter implements NMSAdapter {
     private static Method updateFromPatchMethod = null;
 
     @Override
-    public void applyComponents(ItemMeta meta, ConfigurationSection componentSection) {
-        if (componentSection == null || meta == null) {
+    public void applyComponents(ItemMeta meta, Map<String, Object> components) {
+        if (components == null || meta == null) {
             return;
         }
 
         try {
-            Map<String, Object> map = ConfigToJsonConverter.sectionToMap(componentSection);
-            JsonElement jsonElement = GSON.fromJson(GSON.toJson(map), JsonElement.class);
+            JsonElement jsonElement = GSON.fromJson(GSON.toJson(components), JsonElement.class);
 
             DataResult<DataComponentPatch> result = DataComponentPatch. CODEC.parse(JsonOps.INSTANCE, jsonElement);
             Optional<DataComponentPatch> patchOptional = result.result();
