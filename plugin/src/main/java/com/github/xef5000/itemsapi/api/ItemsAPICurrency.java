@@ -49,6 +49,7 @@ public class ItemsAPICurrency {
         registerIntegration("TOKENENCHANT", config -> new TokenEnchantCurrencyIntegration());
         registerIntegration("SUPERMOBCOINS", config -> new SuperMobCoinsCurrencyIntegration());
         registerIntegration("BEASTTOKENS", config -> new BeastTokensCurrencyIntegration());
+        registerIntegration("XP", config -> new XPCurrencyIntegration());
 
         // Integrations WITH parameters
         registerIntegration("COINSENGINE", config -> {
