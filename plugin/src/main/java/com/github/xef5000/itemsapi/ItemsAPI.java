@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class ItemsAPI {
 
-    public static ItemBuilder createBuilder(String materialString, int amount, String name, int customModelData, List<String> lore, int durability, boolean unbreakable, Map<String, Object> components, Map<Enchantment, Integer> enchantments, List<String> flags) {
+    public static ItemBuilder createBuilder(String materialString, int amount, String name, Integer customModelData, List<String> lore, int durability, boolean unbreakable, Map<String, Object> components, Map<Enchantment, Integer> enchantments, List<String> flags) {
         // Apply all other optional properties
         return new ItemBuilder(
                 materialString,
