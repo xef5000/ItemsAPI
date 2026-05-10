@@ -35,7 +35,7 @@ public class ItemBuilder {
     public final Map<Enchantment, Integer> enchantments;
     public final List<String> flags;
 
-    public ItemBuilder(String material, int amount, String name, int customModelData, List<String> lore, int durability, boolean unbreakable, Map<String, Object> components, Map<Enchantment, Integer> enchantments, List<String> flags) {
+    public ItemBuilder(String material, int amount, String name, Integer customModelData, List<String> lore, int durability, boolean unbreakable, Map<String, Object> components, Map<Enchantment, Integer> enchantments, List<String> flags) {
         this.item = parseItemFromName(material);
         this.meta = item.getItemMeta();
 
